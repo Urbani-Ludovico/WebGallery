@@ -1,0 +1,17 @@
+{
+    "name": "web-gallery",
+    "version": "1.0.0",
+    "main": "src/app.ts",
+    "author": "Urbani Ludovico <lu.urbani@outlook.com>",
+    "scripts": {
+        "build": "bash ./build.sh",
+        "debug": "nodemon src/app.ts --debug",
+        "start": "nodemon src/app.ts"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "nodemon": "^3.0.1",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.2.2"
+    }
+}

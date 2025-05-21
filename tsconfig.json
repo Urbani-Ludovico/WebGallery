@@ -1,0 +1,35 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "baseUrl": "./src/",
+        "esModuleInterop": true,
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "outDir": "./dist",
+        "paths": {
+            "src/": [
+                "./src/*"
+            ]
+        },
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        "strict": true,
+        "target": "es6",
+        "typeRoots": [
+            "./node-modules/@types/"
+        ]
+    },
+    "include": [
+        "src"
+    ],
+    "ts-node": {
+        "files": true
+    }
+}
