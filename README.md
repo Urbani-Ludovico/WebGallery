@@ -4,8 +4,12 @@
 
 ### .env file
 
-```.dotenv
-DEBUG=1
-PORT=3000
-BODY_MAX_SIZE=128000000
-```
+- `DEBUG`: true/false [false]
+- `PORT`: listening port [3000]
+- `BODY_MAX_SIZE`: max body size per request (required)
+- `DATABASE_HOST` (required)
+- `DATABASE_PORT` [3306]
+- `DATABASE_SCHEMA` (required)
+- `DATABASE_USER` (required)
+- `DATABASE_PASSWORD` (required)
+- `DATABASE_CONNLIMIT` [10]
