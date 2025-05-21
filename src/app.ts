@@ -1,4 +1,4 @@
-import express from "express";
+import express, {type Request, type Response, type NextFunction} from "express";
 import compression from "compression";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -54,6 +54,27 @@ app.use(session({
 }));
 
 app.use(timeout(15 * 60 * 1000));
+
+
+// -------------------- PAGES --------------------
+
+app.enable("trust proxy");
+app.use((
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    if (req.headers?.host?.slice(0, 4) === "www." || debug) {
+        if (req.secure || debug) {
+            next();
+        } else {
+            res.redirect(301, "https://" + req.headers.host + req.url);
+        }
+    } else {
+        res.redirect(301, "https://www." + req.headers.host + req.url);
+    }
+});
+
 
 // -------------------- RUN --------------------
 
