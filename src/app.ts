@@ -6,12 +6,14 @@ import session from "express-session";
 import createMemoryStore from "memorystore";
 import timeout from "connect-timeout";
 import path from "path";
+import { connectDb } from "./modules/db/db";
+import PassedData from "./modules/passed_data";
 
 
 dotenv.config()
 
 const port: number | string = process.env.PORT || 3000;
-const debug: boolean = process.env.DEBUG === "1";
+const debug: boolean = process.env.DEBUG === "true";
 
 const app: express.Application = express();
 
@@ -55,6 +57,18 @@ app.use(session({
 }));
 
 app.use(timeout(15 * 60 * 1000));
+
+
+// -------------------- APP CONFIG --------------------
+
+//@ts-ignore
+const passedData: PassedData = {
+    debug,
+    app,
+    db: {
+        gallery: connectDb()
+    }
+}
 
 
 // -------------------- STATICS --------------------
