@@ -1,10 +1,11 @@
-import express, {type Request, type Response, type NextFunction} from "express";
+import express, { type NextFunction, type Request, type Response } from "express";
 import compression from "compression";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import createMemoryStore from "memorystore";
 import timeout from "connect-timeout";
+import path from "path";
 
 
 dotenv.config()
@@ -56,14 +57,17 @@ app.use(session({
 app.use(timeout(15 * 60 * 1000));
 
 
+// -------------------- STATICS --------------------
+
+app.use("/static", express.static(path.join(__dirname, "static")));
+app.use("/styles", express.static(path.join(__dirname, "styles")));
+app.use("/js", express.static(path.join(__dirname, "js")));
+
+
 // -------------------- PAGES --------------------
 
 app.enable("trust proxy");
-app.use((
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
     if (req.headers?.host?.slice(0, 4) === "www." || debug) {
         if (req.secure || debug) {
             next();
